@@ -1,34 +1,50 @@
 <?php
 
-use Illuminate\Support\Facades\App;
-use Illuminate\Http\Request;
+use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-Route::get('set-locale/{locale}', function ($locale) {
-    if (in_array($locale, ['lv', 'en'])) {
-        App::setLocale($locale);
-        session()->put('locale', $locale);
-    }
-    return redirect()->back();
-})->name('locale.setting');
-
-Route::get('set-locale/lv', function ($locale) {
-
-})->name('locale.setting');
-
-// Home route
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('locale/{lang}', [LocaleController::class, 'setLocale']);
 
 // Search product form view route
 Route::get('/mekle', function () {
-    return view('mekle');
+    $product = DB::table('Produkts')
+        ->join('CenuZime', 'Produkts.Svitrkods', '=', 'CenuZime.Svitrkods')
+        ->join('Veikals', 'CenuZime.VeikalsID', '=', 'Veikals.VeikalsID')
+        ->join('Cena', 'CenuZime.CenaID', '=', 'Cena.CenaID')
+        ->leftJoin('Akcija', 'Cena.AkcijaID', '=', 'Akcija.AkcijaID')
+        ->select(
+            'Produkts.Svitrkods',
+            'Produkts.Nosaukums as Produkts_Nosaukums',
+            'Produkts.Daudzums',
+            'Produkts.Mervieniba',
+            'CenuZime.Datums',
+            'Veikals.Nosaukums as Veikals_Nosaukums',
+            'Veikals.Iela',
+            'Veikals.Pilseta',
+            'Veikals.Valsts',
+            'Cena.CenaParVienu',
+            'Cena.CenaParVienibu',
+            'Akcija.AkcijaSpeka',
+            'Akcija.AkcijasCena'
+        )
+        ->where('Produkts.Svitrkods', 0)
+        ->get();
+
+    // Return the search view with the product details
+    return view('mekle', compact('product'));
 })->name('mekle');
+
+Route::get('mekle/locale/{lang}', [LocaleController::class, 'setLocale']);
 
 // Search product form submission route
 Route::post('/mekle', function (Request $request) {
@@ -70,10 +86,15 @@ Route::post('/mekle', function (Request $request) {
     return view('mekle', compact('product'));
 });
 
+Route::get('mekle/locale/{lang}', [LocaleController::class, 'setLocale']);
+
+
 // Route to show the add product form
 Route::get('/pievieno', function () {
     return view('pievieno');
 })->name('pievieno');
+
+Route::get('pievieno/locale/{lang}', [LocaleController::class, 'setLocale']);
 
 // Route to handle form submission from pievieno.blade.php
 Route::post('/submit', function (Request $request) {
@@ -185,6 +206,4 @@ Route::post('/submit', function (Request $request) {
     return redirect('/pievieno')->with('submitted_data', $validatedData);
 });
 
-// Uncomment these lines if you want to enable authentication routes
-// Auth::routes();
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('pievieno/locale/{lang}', [LocaleController::class, 'setLocale']);

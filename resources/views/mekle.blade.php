@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meklē</title>
+    <title>@lang('messages.search')</title>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 <body>
 <div class="container">
-    <h1>Meklē</h1>
+    <h1>@lang('messages.search')</h1>
     <form action="{{ url('/mekle') }}" method="POST">
         @csrf
         <div class="form-section">
@@ -17,23 +17,23 @@
         <br>
         <table>
             <tr>
-                <th>Svitrkods</th>
-                <th>Produkta Nosaukums</th>
-                <th>Daudzums</th>
-                <th>Mervieniba</th>
-                <th>Datums</th>
-                <th>Veikala nosaukums</th>
-                <th>Iela</th>
-                <th>Pilsēta</th>
-                <th>Valsts</th>
-                <th>Cena par vienu</th>
-                <th>Cena par vienību</th>
-                <th>Akcijas Spēka Datums</th>
-                <th>Akcijas Cena</th>
+                <th>@lang('messages.barcode')</th>
+                <th>@lang('messages.prname')</th>
+                <th>@lang('messages.count')</th>
+                <th>@lang('messages.measure')</th>
+                <th>@lang('messages.date')</th>
+                <th>@lang('messages.shname')</th>
+                <th>@lang('messages.street')</th>
+                <th>@lang('messages.city')</th>
+                <th>@lang('messages.country')</th>
+                <th>@lang('messages.one')</th>
+                <th>@lang('messages.unit')</th>
+                <th>@lang('messages.limit')</th>
+                <th>@lang('messages.sale')</th>
             </tr>
             @if($product->isEmpty())
                 <tr>
-                    <td colspan="13">Šāds produkts nav pievienots</td>
+                    <td colspan="13">@lang('messages.no')</td>
                 </tr>
             @else
                 @foreach($product as $prod)
@@ -57,8 +57,8 @@
         </table>
 
         <div class="buttons">
-            <button type="submit" class="button">Meklēt</button>
-            <a href="{{ url('/') }}" class="button">Atpakaļ</a>
+            <button type="submit" class="button">@lang('messages.search')</button>
+            <a href="{{ url('/') }}" class="button">@lang('messages.back')</a>
         </div>
     </form>
 

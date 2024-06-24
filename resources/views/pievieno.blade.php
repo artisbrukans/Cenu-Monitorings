@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pievieno</title>
+    <title>@lang('messages.add')</title>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> <!-- Assuming you have a CSS file for styling -->
 </head>
 <body>
 <div class="container">
-    <h1>Pievieno</h1>
+    <h1>@lang('messages.add')</h1>
 
     <!-- Display success message if it exists in session -->
     @if(session('success'))
@@ -39,87 +39,87 @@
         @endif
 
         <div class="form-section">
-            <h2>Produkts</h2>
-            <label for="svitrkods">Svītrkods:</label>
+            <h2>@lang('messages.product')</h2>
+            <label for="svitrkods">@lang('messages.barcode'):</label>
             <input type="text" id="svitrkods" name="svitrkods" value="{{ old('svitrkods') }}" pattern="\d{8}" required title="Svītrkodam jābūt 8 ciparus garam.">
             @error('svitrkods')
             <div class="error">{{ $message }}</div>
             @enderror
 
-            <label for="nosaukums">Nosaukums:</label>
+            <label for="nosaukums">@lang('messages.prname'):</label>
             <input type="text" id="nosaukums" name="nosaukums" value="{{ old('nosaukums') }}" required>
             @error('nosaukums')
             <div class="error">{{ $message }}</div>
             @enderror
 
-            <label for="daudzums">Daudzums:</label>
+            <label for="daudzums">@lang('messages.count'):</label>
             <input type="number" id="daudzums" name="daudzums" value="{{ old('daudzums') }}" required>
             @error('daudzums')
             <div class="error">{{ $message }}</div>
             @enderror
 
-            <label for="mervieniba">Mērvienība:</label>
+            <label for="mervieniba">@lang('messages.measure'):</label>
             <input type="text" id="mervieniba" name="mervieniba" value="{{ old('mervieniba') }}" required>
             @error('mervieniba')
             <div class="error">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-section">
-            <h2>Veikals</h2>
-            <label for="nosaukums_veikals">Nosaukums:</label>
+            <h2>@lang('messages.store')</h2>
+            <label for="nosaukums_veikals">@lang('messages.shname'):</label>
             <input type="text" id="nosaukums_veikals" name="nosaukums_veikals" value="{{ old('nosaukums_veikals') }}" required>
             @error('nosaukums_veikals')
             <div class="error">{{ $message }}</div>
             @enderror
 
-            <label for="valsts">Valsts:</label>
+            <label for="valsts">@lang('messages.country'):</label>
             <input type="text" id="valsts" name="valsts" value="{{ old('valsts') }}" required>
             @error('valsts')
             <div class="error">{{ $message }}</div>
             @enderror
 
-            <label for="pilseta">Pilsēta:</label>
+            <label for="pilseta">@lang('messages.city'):</label>
             <input type="text" id="pilseta" name="pilseta" value="{{ old('pilseta') }}" required>
             @error('pilseta')
             <div class="error">{{ $message }}</div>
             @enderror
 
-            <label for="iela">Iela:</label>
+            <label for="iela">@lang('messages.street'):</label>
             <input type="text" id="iela" name="iela" value="{{ old('iela') }}" required>
             @error('iela')
             <div class="error">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-section">
-            <h2>Cena</h2>
-            <label for="cena_vienu">Cena par vienu:</label>
+            <h2>@lang('messages.sales')</h2>
+            <label for="cena_vienu">@lang('messages.one'):</label>
             <input type="number" step="0.01" id="cena_vienu" name="cena_vienu" value="{{ old('cena_vienu') }}" required min="0">
             @error('cena_vienu')
             <div class="error">{{ $message }}</div>
             @enderror
 
-            <label for="cena_vienibu">Cena par vienību:</label>
+            <label for="cena_vienibu">@lang('messages.unit'):</label>
             <input type="number" step="0.01" id="cena_vienibu" name="cena_vienibu" value="{{ old('cena_vienibu') }}" required min="0">
             @error('cena_vienibu')
             <div class="error">{{ $message }}</div>
             @enderror
 
-            <label for="akcijas_cena">Akcijas cena:</label>
+            <label for="akcijas_cena">@lang('messages.sale'):</label>
             <input type="number" step="0.01" id="akcijas_cena" name="akcijas_cena" value="{{ old('akcijas_cena') }}">
             @error('akcijas_cena')
             <div class="error">{{ $message }}</div>
             @enderror
 
-            <label for="akcijas_garums">Akcijas garums (YYYY-MM-DD):</label>
+            <label for="akcijas_garums">@lang('messages.limit') (YYYY-MM-DD):</label>
             <input type="date" id="akcijas_garums" name="akcijas_garums" value="{{ old('akcijas_garums') }}">
             @error('akcijas_garums')
             <div class="error">{{ $message }}</div>
             @enderror
         </div>
-        <div style="text-align: center;">
-            <button type="submit" class="button">Pievienot</button>
+        <div>
+            <button type="submit" class="button">@lang('messages.add')</button>
             <!-- Redirects to the welcome view -->
-            <a href="{{ url('/') }}" class="button">Atpakaļ</a>
+            <a href="{{ url('/') }}" class="button">@lang('messages.back')</a>
         </div>
     </form>
 </div>
