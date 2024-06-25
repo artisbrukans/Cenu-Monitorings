@@ -21,4 +21,5 @@ return[
     'store' => 'Veikals',
     'product' => 'Produkts',
     'sales' => 'Akcija',
+    'delete' => 'Dzēst',
 ];

@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AdminDashboardController;
+//use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductDeleteController;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,10 +29,13 @@ Route::get('/pievieno', function () {
 // Route to handle form submission from pievieno.blade.php
 Route::post('/submit', [ProductController::class, 'submitProduct']);
 
+
 Route::get('/dzest', function ()
 {
     return view('dzest');
 })->name('dzest');
+Route::get('/delete-product', [ProductController::class, 'searchFormView'])->name('delete.product.form');
+Route::post('/delete-product', [ProductController::class, 'deleteProduct'])->name('delete.product');
 
 
 Route::get('/dashboard', function () {

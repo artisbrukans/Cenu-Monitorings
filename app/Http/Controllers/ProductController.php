@@ -35,6 +35,19 @@ class ProductController extends Controller
         return view('mekle', compact('product'));
     }
 
+    public function deleteProduct(Request $request)
+    {
+        $svitrkods = $request->input('svitrkods');
+        $product = DB::table('Produkts')->where('Svitrkods', $svitrkods)->first();
+
+        if ($product) {
+            DB::table('Produkts')->where('Svitrkods', $svitrkods)->delete();
+            return redirect()->back()->with('status', __('messages.product_deleted'));
+        }
+
+        return redirect()->back()->with('error', __('messages.product_not_found'));
+    }
+
     public function searchProduct(Request $request)
     {
         $validatedData = $request->validate([
@@ -132,6 +145,39 @@ class ProductController extends Controller
         $request->session()->flash('success', 'Product, store, promotion, and price submitted successfully!');
 
         return redirect('/pievieno')->with('submitted_data', $validatedData);
+    }
+
+    public function showDeleteForm(Request $request)
+    {
+        $svitrkods = $request->input('svitrkods', '');  // Initialize $svitrkods with an empty string if not provided
+        $product = collect();
+
+        if ($svitrkods) {
+            $product = DB::table('Produkts')
+                ->join('CenuZime', 'Produkts.Svitrkods', '=', 'CenuZime.Svitrkods')
+                ->join('Veikals', 'CenuZime.VeikalsID', '=', 'Veikals.VeikalsID')
+                ->join('Cena', 'CenuZime.CenaID', '=', 'Cena.CenaID')
+                ->leftJoin('Akcija', 'Cena.AkcijaID', '=', 'Akcija.AkcijaID')
+                ->select(
+                    'Produkts.Svitrkods',
+                    'Produkts.Nosaukums as Produkts_Nosaukums',
+                    'Produkts.Daudzums',
+                    'Produkts.Mervieniba',
+                    'CenuZime.Datums',
+                    'Veikals.Nosaukums as Veikals_Nosaukums',
+                    'Veikals.Iela',
+                    'Veikals.Pilseta',
+                    'Veikals.Valsts',
+                    'Cena.CenaParVienu',
+                    'Cena.CenaParVienibu',
+                    'Akcija.AkcijaSpeka',
+                    'Akcija.AkcijasCena'
+                )
+                ->where('Produkts.Svitrkods', $svitrkods)
+                ->get();
+        }
+
+        return view('delete-product', compact('product', 'svitrkods'));
     }
 
 }

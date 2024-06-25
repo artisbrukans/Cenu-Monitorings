@@ -21,4 +21,5 @@ return[
     'store' => 'Store',
     'product' => 'Product',
     'sales' => 'Sale',
+    'delete' => 'Delete',
 ];

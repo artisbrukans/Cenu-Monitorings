@@ -9,7 +9,7 @@
 <body>
 <div>
     @if (Route::has('login') && Auth::check())
-        <div class="top-right links">
+        <div class="log">
             <a href="{{ url('/profile') }}">Profile</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
@@ -22,7 +22,7 @@
             </form>
         </div>
     @elseif (Route::has('login') && !Auth::check())
-        <div class="top-right links">
+        <div class="log">
             <a href="{{ url('/login') }}">Login</a>
             <a href="{{ url('/register') }}">Register</a>
         </div>

@@ -11,6 +11,7 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
+
     /**
      * Display the login view.
      */
@@ -27,6 +28,10 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        $user = Auth::user();
+        $id = Auth::id();
+
 
         if($request->user()->usertype === 'admin')
         {
