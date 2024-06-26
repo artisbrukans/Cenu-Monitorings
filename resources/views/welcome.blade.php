@@ -23,8 +23,8 @@
         </div>
     @elseif (Route::has('login') && !Auth::check())
         <div class="log">
-            <a href="{{ url('/login') }}">Login</a>
-            <a href="{{ url('/register') }}">Register</a>
+            <a href="{{ url('/login') }}">@lang('messages.login')</a>
+            <a href="{{ url('/register') }}">@lang('messages.register')</a>
         </div>
     @endif
     <div class="container">
