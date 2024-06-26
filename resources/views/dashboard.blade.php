@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -12,21 +10,21 @@
 <div>
     @if (Route::has('login') && Auth::check())
         <div class="log">
-            <a href="{{ url('/profile') }}">Profile</a>
+            <a href="{{ url('/profile') }}">@lang('messages.profile')</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
 
                 <x-responsive-nav-link :href="route('logout')"
                                        onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                    {{ __('Log Out') }}
+                    @lang('messages.logout')
                 </x-responsive-nav-link>
             </form>
         </div>
     @elseif (Route::has('login') && !Auth::check())
         <div class="log">
-            <a href="{{ url('/login') }}">Login</a>
-            <a href="{{ url('/register') }}">Register</a>
+            <a href="{{ url('/login') }}">@lang('messages.login')</a>
+            <a href="{{ url('/register') }}">@lang('messages.register')</a>
         </div>
     @endif
     <div class="container">

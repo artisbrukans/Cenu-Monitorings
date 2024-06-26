@@ -6,7 +6,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductDeleteController;
 
 
 
@@ -15,6 +14,7 @@ Route::get('/', function () {
 });
 
 Route::get('locale/{lang}', [LocaleController::class, 'setLocale']);
+
 
 // Search product form view route
 Route::get('/mekle', [ProductController::class, 'searchFormView'])->name('mekle');
@@ -30,12 +30,11 @@ Route::get('/pievieno', function () {
 Route::post('/submit', [ProductController::class, 'submitProduct']);
 
 
-Route::get('/dzest', function ()
-{
-    return view('dzest');
-})->name('dzest');
-Route::get('/delete-product', [ProductController::class, 'searchFormView'])->name('delete.product.form');
-Route::post('/delete-product', [ProductController::class, 'deleteProduct'])->name('delete.product');
+
+// Search product form view route
+Route::get('/dzest', [ProductController::class, 'searchFormDelete'])->name('dzest');
+// Search product form submission route
+Route::post('/dzest', [ProductController::class, 'deleteProduct']);
 
 
 Route::get('/dashboard', function () {

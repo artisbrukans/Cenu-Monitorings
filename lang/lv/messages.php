@@ -22,4 +22,12 @@ return[
     'product' => 'Produkts',
     'sales' => 'Akcija',
     'delete' => 'Dzēst',
+    'login' => 'Pieslēgties',
+    'register' => 'Reģistrēties',
+    'profile' => 'Profilis',
+    'logout' => 'Izrakstīties',
+    'pricetag' => 'Cenuzīmes ID: ',
+    'product_not_found' => 'Šāda produkta nav',
+    'product_deleted' => 'Produkts izdzēsts!',
+    'delete_error' => 'Kļūda',
 ];

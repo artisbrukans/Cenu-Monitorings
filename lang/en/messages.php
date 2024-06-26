@@ -22,4 +22,12 @@ return[
     'product' => 'Product',
     'sales' => 'Sale',
     'delete' => 'Delete',
+    'login' => 'Login',
+    'register' => 'Register',
+    'profile' => 'Profile',
+    'logout' => 'Log out',
+    'pricetag' => 'Price tag ID: ',
+    'product_not_found' => 'Product not found',
+    'product_deleted' => 'Product deleted!',
+    'delete_error' => 'Delete product failed!',
 ];

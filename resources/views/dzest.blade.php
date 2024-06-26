@@ -9,63 +9,24 @@
 <body>
 <div class="container">
     <h1>@lang('messages.delete')</h1>
-    <form action="{{ route('delete.product.form') }}" method="GET">
-        <div class="form-section">
-            <input type="text" id="svitrkods" name="svitrkods" value="{{ old('svitrkods', $svitrkods) }}" required>
-            <button type="submit" class="button">@lang('messages.search')</button>
-        </div>
-    </form>
-
-    @if(session('status'))
-        <div class="alert alert-success">{{ session('status') }}</div>
-    @elseif(session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
-    @endif
-
-    <form action="{{ route('delete.product') }}" method="POST">
+    <form action="{{ url('/dzest') }}" method="POST">
         @csrf
-        <input type="hidden" name="svitrkods" value="{{ $svitrkods }}">
+        <div class="form-section">
+            <label for="CenuZimeID">@lang('messages.pricetag')</label>
+            <input type="text" id="CenuZimeID" name="CenuZimeID" required>
+        </div>
         <br>
-        <table>
-            <tr>
-                <th>@lang('messages.barcode')</th>
-                <th>@lang('messages.prname')</th>
-                <th>@lang('messages.count')</th>
-                <th>@lang('messages.measure')</th>
-                <th>@lang('messages.date')</th>
-                <th>@lang('messages.shname')</th>
-                <th>@lang('messages.street')</th>
-                <th>@lang('messages.city')</th>
-                <th>@lang('messages.country')</th>
-                <th>@lang('messages.one')</th>
-                <th>@lang('messages.unit')</th>
-                <th>@lang('messages.limit')</th>
-                <th>@lang('messages.sale')</th>
-            </tr>
-            @if($product->isEmpty())
-                <tr>
-                    <td colspan="13">@lang('messages.no')</td>
-                </tr>
-            @else
-                @foreach($product as $prod)
-                    <tr>
-                        <td>{{ $prod->Svitrkods }}</td>
-                        <td>{{ $prod->Produkts_Nosaukums }}</td>
-                        <td>{{ $prod->Daudzums }}</td>
-                        <td>{{ $prod->Mervieniba }}</td>
-                        <td>{{ $prod->Datums }}</td>
-                        <td>{{ $prod->Veikals_Nosaukums }}</td>
-                        <td>{{ $prod->Iela }}</td>
-                        <td>{{ $prod->Pilseta }}</td>
-                        <td>{{ $prod->Valsts }}</td>
-                        <td>{{ $prod->CenaParVienu }}</td>
-                        <td>{{ $prod->CenaParVienibu }}</td>
-                        <td>{{ $prod->AkcijaSpeka }}</td>
-                        <td>{{ $prod->AkcijasCena }}</td>
-                    </tr>
-                @endforeach
-            @endif
-        </table>
+        @if(session('status'))
+            <div class="success-message">
+                {{ session('status') }}
+            </div>
+        @endif
+        @if(session('error'))
+            <div class="error-message">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <div>
             @if(Auth::check())
                 @if(Auth::user()->isAdmin())

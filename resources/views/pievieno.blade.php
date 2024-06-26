@@ -119,14 +119,14 @@
         <div>
             @if(Auth::check())
                 @if(Auth::user()->isAdmin())
-                    <button type="submit" class="button">@lang('messages.search')</button>
+                    <button type="submit" class="button">@lang('messages.add')</button>
                     <a href="{{ url('admin/dashboard') }}" class="button">@lang('messages.back')</a>
                 @else
-                    <button type="submit" class="button">@lang('messages.search')</button>
+                    <button type="submit" class="button">@lang('messages.add')</button>
                     <a href="{{ url('/dashboard') }}" class="button">@lang('messages.back')</a>
                 @endif
             @else
-                <button type="submit" class="button">@lang('messages.search')</button>
+                <button type="submit" class="button">@lang('messages.add')</button>
                 <a href="{{ url('/') }}" class="button">@lang('messages.back')</a>
             @endif
         </div>
